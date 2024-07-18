@@ -17,7 +17,7 @@ pub use view::*;
 
 mod app_views;
 use app_views::AppViews;
-
+use crate::app_view::app_views::WindowWrapper;
 #[derive(Clone, Debug)]
 pub(crate) struct SendSyncWrapper<T>(pub(crate) T);
 
@@ -28,17 +28,17 @@ unsafe impl<T> Sync for SendSyncWrapper<T> {}
 #[derive(Debug)]
 pub struct AppViewWindow(pub(crate) WindowWrapper<AppView>);
 
-impl Deref for AppViewWindow {
-    type Target = AppView;
+// impl Deref for AppViewWindow {
+//     type Target = AppView;
 
-    fn deref(&self) -> &Self::Target {
-        &self.0
-    }
-}
+//     fn deref(&self) -> &Self::Target {
+//         &self.0
+//     }
+// }
 
 pub struct AppViewPlugin;
 
-impl Plugin for AppViewPlugin {
+impl  AppViewPlugin {
     fn build(&self, app: &mut App) {
 
     }

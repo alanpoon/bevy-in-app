@@ -10,9 +10,10 @@ use app_view::App;
 #[allow(unused_variables)]
 pub fn create_breakout_app(
 ) -> App {
-
+    App{}
 }
-
+pub struct KeyCode{}
+pub struct ButtonState{}
 #[cfg(any(target_os = "android", target_os = "ios"))]
 pub(crate) fn change_input(app: &mut App, key_code: KeyCode, state: ButtonState) {
 

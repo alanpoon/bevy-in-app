@@ -1,5 +1,6 @@
 use crate::app_view::{create_bevy_window, IOSViewObj};
-
+use crate::App;
+use log::info;
 #[no_mangle]
 pub fn create_bevy_app(view: *mut objc::runtime::Object, scale_factor: f32) -> *mut libc::c_void {
     let mut bevy_app = crate::create_breakout_app();
@@ -22,28 +23,28 @@ pub fn enter_frame(obj: *mut libc::c_void) {
 
 #[no_mangle]
 pub fn touch_started(obj: *mut libc::c_void, x: f32, y: f32) {
-    touched(obj, TouchPhase::Started, Vec2::new(x, y));
+    //touched(obj, TouchPhase::Started, Vec2::new(x, y));
 }
 
 #[no_mangle]
 pub fn touch_moved(obj: *mut libc::c_void, x: f32, y: f32) {
-    touched(obj, TouchPhase::Moved, Vec2::new(x, y));
+    //touched(obj, TouchPhase::Moved, Vec2::new(x, y));
 }
 
 #[no_mangle]
 pub fn touch_ended(obj: *mut libc::c_void, x: f32, y: f32) {
-    touched(obj, TouchPhase::Ended, Vec2::new(x, y));
+    //touched(obj, TouchPhase::Ended, Vec2::new(x, y));
 }
 
 #[no_mangle]
 pub fn touch_cancelled(obj: *mut libc::c_void, x: f32, y: f32) {
-    touched(obj, TouchPhase::Canceled, Vec2::new(x, y));
+    //touched(obj, TouchPhase::Canceled, Vec2::new(x, y));
 }
 
-fn touched(obj: *mut libc::c_void, phase: TouchPhase, position: Vec2) {
-    let app = unsafe { &mut *(obj as *mut App) };
+// fn touched(obj: *mut libc::c_void, phase: TouchPhase, position: Vec2) {
+//     let app = unsafe { &mut *(obj as *mut App) };
 
-}
+// }
 
 #[no_mangle]
 pub fn gyroscope_motion(_obj: *mut libc::c_void, _x: f32, _y: f32, _z: f32) {
@@ -59,14 +60,14 @@ pub fn accelerometer_motion(_obj: *mut libc::c_void, _x: f32, _y: f32, _z: f32) 
 pub fn device_motion(obj: *mut libc::c_void, x: f32, _y: f32, _z: f32) {
     let app = unsafe { &mut *(obj as *mut App) };
     if x > 0.005 {
-        crate::change_input(app, KeyCode::ArrowLeft, ButtonState::Released);
-        crate::change_input(app, KeyCode::ArrowRight, ButtonState::Pressed);
+        //crate::change_input(app, KeyCode::ArrowLeft, ButtonState::Released);
+        //crate::change_input(app, KeyCode::ArrowRight, ButtonState::Pressed);
     } else if x < -0.005 {
-        crate::change_input(app, KeyCode::ArrowRight, ButtonState::Released);
-        crate::change_input(app, KeyCode::ArrowLeft, ButtonState::Pressed);
+        //crate::change_input(app, KeyCode::ArrowRight, ButtonState::Released);
+        //crate::change_input(app, KeyCode::ArrowLeft, ButtonState::Pressed);
     } else {
-        crate::change_input(app, KeyCode::ArrowLeft, ButtonState::Released);
-        crate::change_input(app, KeyCode::ArrowRight, ButtonState::Released);
+        //crate::change_input(app, KeyCode::ArrowLeft, ButtonState::Released);
+        //crate::change_input(app, KeyCode::ArrowRight, ButtonState::Released);
     }
 }
 

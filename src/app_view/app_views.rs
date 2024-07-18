@@ -1,11 +1,13 @@
 use super::{AppView, AppViewWindow};
 use std::collections::HashMap;
+#[derive(Debug)]
 pub struct Entity{
 
 }
-pub struct WindowWrapper<T>(AppView);
+#[derive(Debug)]
+pub struct WindowWrapper<T>(T);
 impl <T>WindowWrapper<T>{
-    fn new(app_view:AppView)->Self{
+    fn new(app_view:T)->Self{
         WindowWrapper(app_view)
     }
 }
@@ -21,9 +23,9 @@ impl AppViews {
         #[cfg(target_os = "ios")] view_obj: super::IOSViewObj,
         #[cfg(target_os = "android")] view_obj: super::AndroidViewObj,
         entity: Entity,
-    ) -> &AppViewWindow {
+    ) -> AppViewWindow {
         let app_view = AppViewWindow(WindowWrapper::new(AppView::new(view_obj)));
-        &app_view
+        app_view
     }
 
     /// Get the AppView that is associated with our entity.

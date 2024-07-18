@@ -194,9 +194,9 @@ use std::io::{self, Write};
 pub async fn init2(app: &mut App) {
     tracing::info!("init....");
     let assets: AssetCache = app.world.resource(asset_cache()).clone();
-    let cert_asset = fs::read_to_string("assets/localhost.crt").unwrap();
-    let cert = Some(BufReader::new(cert_asset).fill_buf().unwrap().to_vec());
-
+    let cert_asset = std::fs::read_to_string("assets/localhost.crt").unwrap();
+    //let cert = Some(BufReader::new(cert_asset).fill_buf().unwrap().to_vec());
+    let cert = Some(cert_asset.into_bytes());
     tracing::info!("cert....{:?}",cert);
     let server_addr= async move {
         //let Some(mut host) = Some(String::from("eu.proxy.ambient.run:9131")) else {

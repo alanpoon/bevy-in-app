@@ -19,6 +19,7 @@ rustup target add aarch64-apple-ios
 
 # Build for iOS target
 sh ./ios_build.sh --release
+sh ./ios_build.sh aarch64-apple-ios-sim --release
 ```
 
 Then, Open `iOS/bevy_in_iOS.xcodeproj` with Xcode，connect an iOS device and run.

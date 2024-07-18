@@ -4,7 +4,7 @@ use raw_window_handle::{
     DisplayHandle, HandleError, HasDisplayHandle, HasWindowHandle, RawDisplayHandle,
     RawWindowHandle, UiKitDisplayHandle, UiKitWindowHandle, WindowHandle,
 };
-
+use crate::App;
 #[derive(Debug, Copy, Clone)]
 pub struct IOSViewObj {
     pub view: *mut Object,
