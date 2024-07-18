@@ -1,18 +1,9 @@
 use crate::app_view::{create_bevy_window, IOSViewObj};
-use bevy::{
-    ecs::system::SystemState,
-    input::{
-        touch::{TouchInput, TouchPhase},
-        ButtonState,
-    },
-    prelude::*,
-};
 
 #[no_mangle]
 pub fn create_bevy_app(view: *mut objc::runtime::Object, scale_factor: f32) -> *mut libc::c_void {
     let mut bevy_app = crate::create_breakout_app();
     let ios_obj = IOSViewObj { view, scale_factor };
-    bevy_app.insert_non_send_resource(ios_obj);
 
     create_bevy_window(&mut bevy_app);
 
@@ -26,7 +17,7 @@ pub fn create_bevy_app(view: *mut objc::runtime::Object, scale_factor: f32) -> *
 pub fn enter_frame(obj: *mut libc::c_void) {
     // 获取到指针指代的 Rust 对象的可变借用
     let app = unsafe { &mut *(obj as *mut App) };
-    app.update();
+    //app.update();
 }
 
 #[no_mangle]
@@ -51,19 +42,7 @@ pub fn touch_cancelled(obj: *mut libc::c_void, x: f32, y: f32) {
 
 fn touched(obj: *mut libc::c_void, phase: TouchPhase, position: Vec2) {
     let app = unsafe { &mut *(obj as *mut App) };
-    let mut windows_system_state: SystemState<Query<(Entity, &Window)>> =
-        SystemState::from_world(app.world_mut());
-    let (entity, _) = windows_system_state.get(app.world_mut()).single();
 
-    let touch = TouchInput {
-        window: entity,
-        phase,
-        position,
-        force: None,
-        id: 0,
-    };
-
-    app.world_mut().send_event(touch);
 }
 
 #[no_mangle]

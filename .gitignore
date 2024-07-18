@@ -9,10 +9,9 @@ target/
 .DS_Store
 
 # IDE/Editor configuration files
-.vscode
 .idea
 
-**/*.so 
+**/*.so
 JetpackCompose/
 iOS/libs/debug/*
 iOS/libs/release/*

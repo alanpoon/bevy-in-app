@@ -1,0 +1,11 @@
+{
+  "editor.detectIndentation": false,
+  "editor.tabSize": 4,
+  "files.trimTrailingWhitespace": true,
+  "[toml]": {
+    "editor.formatOnSave": false
+  },
+  "rust-analyzer.showUnlinkedFileNotification": false,
+  "rust-analyzer.cargo.target" :"aarch64-apple-ios-sim"
+  //"rust-analyzer.cargo.target": "aarch64-linux-android"
+}

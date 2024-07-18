@@ -1,8 +1,14 @@
 use super::{AppView, AppViewWindow};
-use bevy::ecs::entity::Entity;
-use bevy::utils::HashMap;
-use bevy::window::WindowWrapper;
+use std::collections::HashMap;
+pub struct Entity{
 
+}
+pub struct WindowWrapper<T>(AppView);
+impl <T>WindowWrapper<T>{
+    fn new(app_view:AppView)->Self{
+        WindowWrapper(app_view)
+    }
+}
 #[derive(Debug, Default)]
 pub struct AppViews {
     views: HashMap<super::WindowId, AppViewWindow>,
@@ -17,22 +23,16 @@ impl AppViews {
         entity: Entity,
     ) -> &AppViewWindow {
         let app_view = AppViewWindow(WindowWrapper::new(AppView::new(view_obj)));
-        let window_id = super::WindowId::new();
-        self.entity_to_window_id.insert(entity, window_id);
-
-        self.views.entry(window_id).insert(app_view).into_mut()
+        &app_view
     }
 
     /// Get the AppView that is associated with our entity.
     pub fn get_view(&self, entity: Entity) -> Option<&AppViewWindow> {
-        self.entity_to_window_id
-            .get(&entity)
-            .and_then(|window_id| self.views.get(window_id))
+        None
     }
 
     /// This should mostly just be called when the window is closing.
     pub fn remove_view(&mut self, entity: Entity) -> Option<AppViewWindow> {
-        let window_id = self.entity_to_window_id.remove(&entity)?;
-        self.views.remove(&window_id)
+        None
     }
 }
