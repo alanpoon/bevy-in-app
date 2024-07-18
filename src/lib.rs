@@ -6,10 +6,16 @@ mod ffi;
 #[cfg(any(target_os = "android", target_os = "ios"))]
 pub use ffi::*;
 use app_view::App;
-
+use winit::event_loop::{EventLoop,EventLoopBuilder};
+use ambient;
 #[allow(unused_variables)]
 pub fn create_breakout_app(
 ) -> App {
+    let event_loop: EventLoop<()> = EventLoopBuilder::new()
+    .build();
+    log::debug!("start...");
+
+    ambient::new(event_loop);
     App{}
 }
 pub struct KeyCode{}
